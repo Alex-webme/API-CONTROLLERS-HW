@@ -41,3 +41,11 @@ describe("POST /api/v1/login", () => {
     });
   });
 });
+
+describe("GET /api/v1/user", () => {
+  test("Информацию о пользователе можно получить, если токен правильный", async () => {
+    const token = await user.getAuthToken();
+    const res = await user.getUserInfo(token);
+    expect(res.status).toEqual(200);
+  });
+});
