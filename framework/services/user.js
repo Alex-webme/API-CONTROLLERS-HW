@@ -18,6 +18,15 @@ const user = {
       .set("Authorization", `Bearer ${token}`)
       .send();
   },
+
+  createUser: () => {
+    return supertest(config.url).post("/api/v1/register").send({
+      email: "username88@mail.com",
+      id: 88,
+      password: "password88",
+      username: "username88",
+    });
+  },
 };
 
 export default user;

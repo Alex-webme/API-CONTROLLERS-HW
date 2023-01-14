@@ -49,3 +49,20 @@ describe("GET /api/v1/user", () => {
     expect(res.status).toEqual(200);
   });
 });
+
+describe("POST /api/v1/register", () => {
+  test("Создание нового пользователя проходит успешно", async () => {
+    const res = await user.createUser();
+    expect(res.status).toEqual(200);
+    expect(res.body.username).toBe("username88");
+  });
+
+  test("Создание нового пользователя возвращает статус с кодом ошибки, если пользователь с таким username был создан ранее", async () => {
+    const res = await user.createUser();
+    expect(res.status).toEqual(400);
+    expect(res.body).toEqual({
+      code: 1001,
+      message: "A user with this username already exists.",
+    });
+  });
+});
